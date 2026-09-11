@@ -1077,95 +1077,6 @@ function clearDraftChallengesForUser(user: User): void {
 
 export const commands: Chat.ChatCommands = {
 
-	/**
-	 * Shows the draft you're currently participating in.
-	 */
-	draftstatus(target, room, user) {
-
-		const session = getUserDraftSession(user);
-
-		if (!session) {
-			return this.errorReply(
-				`You are not currently in a draft.`
-			);
-		}
-
-
-		this.sendReply(
-			`Draft: ${session.p1.name} vs ${session.p2.name}`
-		);
-
-		this.sendReply(
-			`${session.p1.name}'s pack: ${session.p1Pack?.name}`
-		);
-
-		this.sendReply(
-			`${session.p2.name}'s pack: ${session.p2Pack?.name}`
-		);
-
-		this.sendReply(
-			`Selected pack: ${
-				session.selectedPack?.name ?? 'Not selected yet'
-			}`
-		);
-
-		this.sendReply(
-			`Coin toss winner: ${
-				session.coinTossWinner === 'p1'
-					? session.p1.name
-					: session.coinTossWinner === 'p2'
-						? session.p2.name
-						: 'Not decided yet'
-			}`
-		);
-
-		this.sendReply(
-			`Round: ${session.round}`
-		);
-
-		if (user === session.p1 && session.p1Offer) {
-
-		this.sendReply(
-			`Your choices:`
-		);
-
-		this.sendReply(
-			`1. ${session.p1Offer[0].species}`
-		);
-
-		this.sendReply(
-			`2. ${session.p1Offer[1].species}`
-		);
-
-		} else if (user === session.p2 && session.p2Offer) {
-
-			this.sendReply(
-				`Your choices:`
-			);
-
-			this.sendReply(
-				`1. ${session.p2Offer[0].species}`
-			);
-
-			this.sendReply(
-				`2. ${session.p2Offer[1].species}`
-			);
-		}
-	
-		const team =
-		user === session.p1
-			? session.p1Team
-			: session.p2Team;
-
-		this.sendReply(
-			`Your team: ${
-				team.length > 0
-					? team.map(pokemon => pokemon.species).join(', ')
-					: 'None yet'
-			}`
-		);
-	},
-
 	draftpick(target, room, user) {
 
 		const session = getUserDraftSession(user);
@@ -1672,10 +1583,6 @@ export const commands: Chat.ChatCommands = {
 			`|draftsearch|0`
 		);
 	},
-
-	draftstatushelp: [
-		`/draftstatus - Shows your current draft session.`,
-	],
 
 	draftpickhelp: [
 		`/draftpick [1 or 2] - Selects which offered Pokémon you want to keep.`,
