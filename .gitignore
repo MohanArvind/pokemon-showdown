@@ -1,5 +1,11 @@
 /config/*
 !/config/formats.ts
+
+# Clash Draft source files
+!/config/custom-formats.ts
+!/config/draft-packs.ts
+
+
 /logs/**/*
 /test/modlogs
 /test/replays/*.html
