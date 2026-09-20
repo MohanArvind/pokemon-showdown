@@ -4,6 +4,7 @@
 # Clash Draft source files
 !/config/custom-formats.ts
 !/config/draft-packs.ts
+!/config/config.js
 
 
 /logs/**/*
